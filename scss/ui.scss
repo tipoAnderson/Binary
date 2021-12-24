@@ -1,0 +1,63 @@
+//<ОСНОВНОЙ БЛОК>======================================================================================
+.header-block {
+    .title {
+        font-size: 34px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 8.95px;
+        position: relative;
+        text-align: center;
+        padding: 0 0 30px 0;
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 80px;
+            height: 1px;
+            background-color: #000;
+            margin: 0 0 0 -40px;
+        }
+    }
+}
+
+
+//</ОСНОВНОЙ БЛОК>======================================================================================
+
+
+
+//<ГОТОВЫЕ КЛАССЫ>======================================================================================
+.row::after {display: block; content: ''; clear: both;}
+.rub::after {content: '₽';}
+//===============================================================================================================================================================
+.noselect {-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+//=================================================================================================================================================================
+ol.center {list-style-type: none; counter-reset: item;
+    li{position: relative; padding: 0 0 0 45px;
+        &::before{counter-increment: item; content: counter(item); position: absolute; left: 0;top: 0; color: #818181; font-size: 14px; font-weight: 700; text-align: center;}
+    }
+}
+//=================================================================================================================================================================
+.ellipsis {display: block; overflow: hidden; width: 100%; white-space: nowrap; text-overflow: ellipsis;}
+.es {overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+//=================================================================================================================================================================
+.table {display: table; font-size: 0; width: 100%;}
+.trow {display: table-row;}
+.cell {display: table-cell;
+    &.full{widows: 100%;}
+}
+//=================================================================================================================================================================
+.ibg {background-position: center; background-size: cover; background-repeat: no-repeat;
+    img{display: none;}   //Делает картинку фоновой для блока
+}
+//=================================================================================================================================================================
+.video{position: relative; overflow: hidden; height: 0; padding-bottom: 56.25%;
+    .video,iframe,object.embed{position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+}
+.videobg{
+    video,iframe,object.embed{position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto;} //....
+}
+//=================================================================================================================================================================
+//...
+
+//<ГОТОВЫЕ КЛАССЫ>======================================================================================

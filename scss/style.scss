@@ -1,0 +1,523 @@
+//<МИКСИНЫ>=======================================================================================
+@mixin anim($time,$delay){-webkit-transition: all $time ease $delay;-moz-transition: all $time ease $delay;-ms-transition: all $time ease $delay;-o-transition: all $time ease $delay; transition: all $time ease $delay;}
+@mixin anim_cubic($time,$delay){-webkit-transition: all $time cubic-bezier(0.68,-0.55,0.265,1.55) $delay;-moz-transition: all $time cubic-bezier(0.68,-0.55,0.265,1.55) $delay;-ms-transition: all $time cubic-bezier(0.68,-0.55,0.265,1.55) $delay;-o-transition: all $time cubic-bezier(0.68,-0.55,0.265,1.55) $delay; transition: all $time cubic-bezier(0.68,-0.55,0.265,1.55) $delay;}
+@mixin rotate($deg){-webkit-transform: rotate($deg); -moz-transform: rotate($deg); -ms-transform: rotate($deg); -o-transform: rotate($deg); transform: rotate($deg);}
+@mixin scale($num){-webkit-transform: scale($num); -moz-transform: scale($num); -ms-transform: scale($num); -o-transform: scale($num); transform: scale($num);}
+@mixin skew($num){-webkit-transform: skewX($num); -moz-transform: skewX($num); -ms-transform: skewX($num); -o-transform: skewX($num); transform: skewX($num);}
+@mixin cnt($h){display: flex; flex-direction: column; height: $h; text-align: center; align-items: stretch; justify-content: center;}
+@mixin tr($x,$y,$z){transform: translate3d($x,$y,$z);}
+@mixin flexbox(){display:-webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex; font-size: 0;} //display flex с разными префиксами для разных браузеров
+@mixin flexboxinline(){display:-webkit-inline-flex; display: -moz-inline-flex; display: -ms-inline-flex; display: -o-inline-flex; display: inline-flex;}
+@mixin flexboxorder($val){-webkit-box-ordinal-group: $val;-moz-box-ordinal-group: $val;-ms-flex-order: $val;-webkit-order: $val;order: $val;}   
+//</МИКСИНЫ>=======================================================================================
+
+//<ШРИФТЫ>================================================================================================================
+
+//<Подключаем шрифты>===============================================================================
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap'); // Шрифт Lato
+//<Подключаем шрифты>===============================================================================
+
+//<Шрифт по умолчанию>==============================================================================
+$fontfamily:"Lato";
+body{font-family: "Lato";}
+//</Шрифт по умолчанию>==============================================================================
+
+//</ШРИФТЫ>================================================================================================================
+
+//<ПЕРЕМЕННЫЕ>===========================================================================================
+$minwidth:320px;
+$mw:1100;
+$md1:$mw+12;
+$md2:992.98;
+$md3:767.98;
+$md4:479.98;
+//</ПЕРЕМЕННЫЕ>===========================================================================================
+
+//<ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===========================================================================
+@import "_nullstyle";
+//</ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===========================================================================
+
+//<ОБОЛОЧКА>===========================================================================================
+.wrapper{width: 100%; min-height: 100%; overflow: hidden;
+    @include flexbox();     
+    flex-direction: column;  
+    &.loaded{}
+}
+//</ОБОЛОЧКА>=========================================================================================
+
+//<ОСНОВНАЯ СЕТКА>==================================================================================================
+.container {max-width: $mw+px; margin: 0 auto; width: 100%;
+    @media(max-width: ($md1+px)){max-width: 970px;}//break point для маленького компьютера
+    @media(max-width: ($md2+px)){max-width: 750px;}//break point для планшета
+    @media(max-width: ($md3+px)){max-width: none; padding: 0 10px;}//break point для смартфона
+}
+//</ОСНОВНАЯ СЕТКА>==================================================================================================
+
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>====================================================================
+//@import "popup.scss"
+//@import "header.scss";
+//@import "footer.scss";
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>====================================================================
+
+//<ОСНОВНОЙ БЛОК>======================================================================================================
+
+html,
+body{
+    height: 100%;   //Для создания foolscreem блока
+}
+
+.mainblock {
+    min-height: 100vh;  //Для создания foolscreem блока
+    background: url(../img/mainblock/bg.jpg) center/cover no-repeat fixed;
+    flex: 1 1 auto;
+    @include flexbox();
+    justify-content: center;
+    text-align: center;
+    padding: 50px 0;
+
+    &__content{
+        flex: 1 1 auto;
+    }
+
+    &__logo {
+    }
+
+    &__text {
+        color: #fff;
+        position: relative;
+        padding-bottom: 45px;
+        margin: 30px 0;
+        &::after{
+            content: "";
+            width: 105px;
+            height: 2px;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            margin-left: -52.5px;
+
+        }
+    }
+
+    &__title {
+        font-size: 34px;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 40px;
+        letter-spacing: 5.44px;
+        margin-bottom: 10px;
+        @media screen and (max-width: ($md3+px)) , screen and (max-height: 600px){
+            font-size: 25px;
+            line-height: 30px;
+        }
+    }
+
+    &__subtitle {
+        font-size: 26px;
+        font-weight: 400;
+        letter-spacing: 4.16px;
+        @media screen and (max-width: ($md3+px)) , screen and (max-height: 600px){
+            font-size: 20px;
+        }
+    }
+
+    &__footer {
+        @include flexboxinline();
+        flex-direction: column;
+    }
+
+    &__btn {
+        @media screen and (max-width: ($md3+px)) , screen and (max-height: 600px){
+            margin-bottom: 30px;
+        }
+        margin-bottom: 75px;
+        &_w{}
+    }
+
+    &__arrow {
+        position: relative;
+        animation: arrow 2s infinite ease;
+        -webkit-animation: arrow 2s infinite ease;
+        -moz-animation: arrow 2s infinite ease;
+        -o-animation: arrow 2s infinite ease; 
+    }
+}
+@keyframes arrow{
+    0%{top: 0;}
+    50%{top: 10px;}
+    100%{top: 0;}
+}
+@-webkit-keyframes arrow{
+    0%{top: 0;}
+    50%{top: 10px;}
+    100%{top: 0;}
+}
+@-moz-keyframes arrow{
+    0%{top: 0;}
+    50%{top: 10px;}
+    100%{top: 0;}
+}
+@-o-keyframes arrow{
+    0%{top: 0;}
+    50%{top: 10px;}
+    100%{top: 0;}
+}
+.container {
+    height: 100%;           
+    @include flexbox();         
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn {&_w {}}   //Настраивалась в forms.scss
+//=========================================================================================================
+.content {
+    background-color: #fff;
+    position: relative;
+    z-index: 50;
+}
+//=========================================================================================================
+.menu {
+    padding: 22px 0;
+    border-bottom: 1px solid #f1f1f1;
+    &_mb{
+        margin-bottom: 130px;
+        @media(max-width: ($md2+px)){
+            margin-bottom: 50px;
+        }
+        @media(max-width: ($md3+px)){
+            margin-bottom: 30px;
+        }
+    }
+    @media (max-width: ($md4+px)){
+        padding: 22px 0 12px 0;
+    }
+
+    &__items {
+    }
+
+    &__list {
+        @include flexbox();
+        justify-content: center;
+        align-items: center;
+        li {margin: 0 25px;
+            @media (max-width: ($md3+px)){
+                margin: 0 15px 10px 15px;
+            }
+            @media (max-width: ($md3+px)){
+                flex: 0 1 33.333%;
+            }
+        }
+        @media (max-width: ($md4+px)){
+            flex-wrap: wrap;
+        }
+    }
+
+    &__link {
+        font-size: 15px;
+        text-transform: uppercase;
+        color: #3c3c3c;
+        @include anim(0.3s, 0s);
+        &:hover {
+            font-weight: 700;
+            color: #ada074;
+        }
+        &_act {
+            font-weight: 700;
+            color: #ada074;
+        }
+    }
+}
+//============================================================================================
+.about {
+    margin-bottom: 60px;
+    @media (max-width: ($md3+px)){
+        margin-bottom: 10px;
+    }
+
+    &__header-block {
+        margin: 0 0 70px 0;
+        @media (max-width: ($md3+px)){
+            margin: 0 0 30px 0;
+        }
+    }
+
+    &__title {
+        margin: 0 0 30px 0;
+    }
+//Стиль about__title title находится в ui.cscc
+    &__text {
+        max-width: 688px;
+        color: #868585;
+        font-size: 14px;
+        font-weight: 300;
+        text-align: center;
+        line-height: 25.89px;
+        margin: 0 auto;
+        
+    }
+
+    &__body{
+        max-width: 824px;
+    }
+
+    &__row {
+        @include flexbox();
+        @media(max-width: ($md3+px)){
+            display: block;
+        }
+        margin: 0 -15px;
+    }
+
+    &__column {
+        margin-bottom: 30px;
+        padding: 0 15px;
+        flex: 0 1 33.333%;
+    }
+}
+
+.iten-about {
+    max-width: 260px;
+    @media(max-width: ($md3+px)){
+    }
+    
+    &__icon {
+        margin: 0 auto 40px;
+        @media(max-width: ($md3+px)){
+            margin-bottom: 15px;
+        }
+        border-radius: 50%;
+        width: 92px;
+        height: 92px;
+        border: 2px solid #f1f1f1;
+        @include flexbox();
+        align-items: center;
+        justify-content: center;
+        &_l {
+            img{
+                position: relative;
+                left: 5px;          //Сдвинули картинку мишени из-за ее особенностей
+            }
+        }
+    }
+
+    &__title {
+        font-size: 22px;
+        @media(max-width: ($md2+px)){
+            font-size: 18px;
+        }
+        text-align: center;
+        letter-spacing: 3.52px;
+        margin: 0 0 36px 0;
+        @media(max-width: ($md3+px)){
+            margin-bottom: 15px;
+        }
+    }
+
+    &__text {
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 26px;
+        text-align: center;
+        color: #868585;
+    }
+}
+//=======================================================================================
+.portfolio {
+    padding: 105px 0 60px 0;
+    background: #f3f3f3;
+    @media (max-width: ($md2+px)){
+    padding: 50px 0 40px 0;}
+
+    &__header-block {
+        margin-bottom: 50px;
+        @media (max-width: ($md2+px)){
+            margin-bottom: 30px;}
+        @media (max-width: ($md3+px)){
+            margin-bottom: 20px;}
+    }
+
+    &__filter {
+        margin-bottom: 135px;
+        @media (max-width: ($md2+px)){
+            margin-bottom: 50px;}
+        @media (max-width: ($md3+px)){
+            margin-bottom: 30px;}
+    }
+
+    &__items {
+        @include flexbox();
+        flex-wrap: wrap;
+        margin: 0 -15px;
+    }
+
+    &__column {
+        flex: 0 1 50%;
+        max-width: 50%; // Лечит болячку в explorer с неразъебивающимися на две колонки элементами
+        padding: 0 15px;
+        margin-bottom: 30px;
+        @media (max-width: ($md3+px)){
+            flex: 1 1 100%;
+            margin-bottom: 20px;
+        }
+    }
+
+    &__item {
+        img{
+            max-width: 100%;
+        }
+    }
+
+    &__footer {
+        padding-top: 35px;
+        @media (max-width: ($md3+px)){
+            padding-top: 15px;}
+    }
+
+    &__btn {
+    }
+}
+
+.filter {
+
+    &__list {
+        @include flexbox();
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__item {
+        color: #3c3c3c;
+        font-size: 15px;
+        text-transform: uppercase;
+        margin: 0 25px;
+        cursor: pointer;
+        &_active{
+            font-weight: 700;
+            color: #ada074;
+        }
+        @media (max-width: ($md3+px)){
+            margin: 0 15px;}
+    }
+}
+//=====================================================================================================
+.partners {
+    background: url('../img/partners/photo-background.jpg') center / cover no-repeat;
+    padding: 100px 0 70px 0;
+    @media (max-width: ($md3+px)){
+        padding: 30px 0 0px 0;
+    }
+
+    &__title {
+        font-size: 30px;
+        color: #fff;
+        text-align: center;
+        font-weight: 300;
+        margin-bottom: 90px;
+    }
+
+    &__items {
+        @include flexbox();
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    &__column {
+        padding: 0 50px;
+        margin-bottom: 70px;
+        @media (max-width: ($md3+px)){
+            padding: 0 30px;
+        }
+    }
+
+    &__item {
+    }
+}
+//=====================================================================================================
+.contacts {
+
+    &__header-block {
+        margin-bottom: 120px;
+    }
+
+    &__body {
+        @include flexbox();
+        margin: 0 -15;
+    }
+
+    &__column {
+        flex: 0 1 50%;
+        padding: 0 15px;
+    }
+
+    &__form {
+        
+    }
+
+    &__content {
+    }
+
+    &__text {
+    }
+
+    &__name {
+    }
+
+    &__social {
+    }
+
+    &__email {
+    }
+}
+
+.form-contacts {
+
+    &__body {
+    }
+
+    &__row {
+    }
+
+    &__column {
+    }
+
+    &__input {
+        border-top: 1px solid #000;
+    }
+
+    &__label {
+    }
+}
+.input {
+}
+.form {
+
+    &__btn {
+    }
+}
+.btn {
+
+    &_b {
+    }
+}
+.social {
+    @include flexbox();
+
+    &__item {
+        margin-top: 15px;
+    }
+}
+
+//=====================================================================================================
+
+
+
+//</ОСНОВНОЙ БЛОК>======================================================================================================
+
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ UI СТИЛЕЙ, ФОРМ И ГОТОВЫХ КЛАССОВ>================================================================
+@import "forms.scss";
+@import "ui.scss";
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ UI СТИЛЕЙ, ФОРМ И ГОТОВЫХ КЛАССОВ>================================================================
